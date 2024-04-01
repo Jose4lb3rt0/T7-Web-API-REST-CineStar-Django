@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% load static %}
+{% block contenido_interno %}
+    <br/><h1>Nuestros Cines</h1><br/>
+    {% for cine in cines %}
+        <div class="contenido-cine">
+            <img src="{% static 'img/cine/' %}{{ cine.id }}.1.jpg" width="227" height="170"/>
+            <div class="datos-cine">
+                <h4>{{ cine.RazonSocial }}</h4><br/>
+                <span>{{ cine.Direccion }} - {{ cine.Detalle }}<br/><br/>Teléfono: {{ cine.Telefonos }}</span>
+            </div>
+            <br/>
+            {% if cine.id %}
+                <a href="{% url 'cine' id=cine.id %}">
+                    <img src="{% static 'img/varios/ico-info2.png' %}" width="150" height="40"/>
+                </a>
+            {% else %}
+                <!-- Handle the case where cine.id is not available -->
+                <span>No ID available</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock contenido_interno %}
